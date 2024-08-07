@@ -1,10 +1,20 @@
-import express from 'express';
-// import { create, deleteUser, fetch, update } from '../controller/userController.js';
-const route = express.Router()
+import express from "express";
+import { fetch, create, update, deleteUser } from "../controller/userController.js";
 
-// route.get("/fetch", fetch)
-// route.post("/create", create)
-// route.put("/update/:id", update)
-// route.delete("/deleteUser/:id",deleteUser)
 
-export default route
+const router = express.Router();
+
+// Route to get all users
+router.get("/users", fetch);
+
+// Route to create a new user
+router.post("/users", create);
+
+// Route to update an existing user by ID
+router.put("/users/:id", update);
+
+// Route to delete a user by ID
+router.delete("/users/:id", deleteUser);
+
+export default router;
+

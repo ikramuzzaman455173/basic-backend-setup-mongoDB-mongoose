@@ -1,23 +1,53 @@
-//init code
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-//user schema
-const dataSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
-    pin_name: {
+    name: {
       type: String,
+      required: true,
+      trim: true,
+      maxlength: 100,
     },
-    status: {
-      type: Boolean,
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
     },
-    response_from_iot: {
+    password: {
+      type: String,
+      required: true,
+    },
+    age: {
+      type: Number,
+      min: 18,
+    },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    },
+    isActive: {
       type: Boolean,
+      default: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
     },
   },
   { timestamps: true }
 );
 
+// Export the model
+export default mongoose.model("User", userSchema);
 
-//module exports
-// module.exports = mongoose.model("data",dataSchema);
-export default mongoose.model("data",dataSchema)
+
+// {
+//   "name": "Jane Smith",
+//   "email": "janesmith@example.com",
+//   "password": "MyS3cur3P@ssword",
+//   "age": 28,
+//   "role": "user"
+// }

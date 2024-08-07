@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import route from "./routes/userRoute.js";
+import userRouter from "./routes/userRoute.js";
 
 const app = express();
 app.use(bodyParser.json());
@@ -29,7 +29,7 @@ mongoose.connect(MongoUrl).then(() => {
 });
 
 
-// app.use("/api/user",route)
-app.use("/api", route)
+app.use("/api/user",userRouter)
+// app.use("/api", route)
 
 // app.use("/api")
